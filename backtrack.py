@@ -26,7 +26,7 @@ def distance(origin, destination):
 
     return (d)
 
-def get_risky(data, target_id, max_radius, time_window):
+def get_risky(data, target_id, max_radius=100, time_window=20):
     timed = datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=time_window, hours=0, weeks=0)
     cand_dict = {}
 
