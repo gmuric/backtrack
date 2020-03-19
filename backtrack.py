@@ -73,14 +73,13 @@ def get_risky(data, target_id, max_radius=100, time_window=20):
     res = pd.DataFrame.from_dict(cand_dict).T
     res['min_dist_inverse'] = [1/x if x > 0 else 1/(x+0.01) for x in list(res['min_dist'])]
 
-    normalize_cols = ['duration','min_dist_inverse']
+    normalize_cols = ['duration', 'num_encounters']
     res_norm = pd.DataFrame()
     for col in normalize_cols:
         lower = res[col].min()/res[col].max()
         upper = 1
         res_norm[col] = [(upper - lower) * (x - res[col].min())/(res[col].max()-res[col].min()) + lower for x in list(res[col])]
-        #res_norm[col] = [lower + (upper - lower) * x for x in list(res[col])]
-        #res_norm[col] = (res[col]-res[col].min())/(res[col].max()-res[col].min())
+ 
         
     res = res.reset_index().rename(columns={'index':'id'})
     
@@ -89,5 +88,5 @@ def get_risky(data, target_id, max_radius=100, time_window=20):
     
     res_norm['score'] = res_norm['duration']*res_norm['min_dist_inverse']*res_norm['num_encounters']
 
-    res = res.join(res_norm['score'])
-    return(res)
+    res = res.join(res_norm['score']).drop(columns=['min_dist_inverse'])
+    return(res.to_dict('records'))
