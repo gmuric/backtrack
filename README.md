@@ -1,6 +1,6 @@
 # backtrack
 
-# Back-track people with symptoms using geo-location data to identify exposed population
+## Back-track people with symptoms using geo-location data to identify exposed population
 
 ### See the example: https://github.com/gmuric/backtrack/blob/master/backtrack_example.ipynb
 
