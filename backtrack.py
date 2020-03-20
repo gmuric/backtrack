@@ -7,8 +7,6 @@ import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-import warnings
-warnings.filterwarnings('ignore')
 
 def distance(origin, destination):
     # Haversine formula example in Python
